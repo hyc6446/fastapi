@@ -27,5 +27,3 @@ class User(UserBase):
     class Config:
         from_attributes = True
 
-class UserResponse(BaseModel):
-    pass

@@ -9,11 +9,12 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from app.core.config import setting
+import redis
 
-
-engine = create_engine(setting.DATABASE_URL_SQLITE, connect_args={"check_same_thread": False})
+engine = create_engine(setting.MYSQL_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
+redis_client= redis.Redis.from_url(setting.REDIS_URL)
 
 # 数据库连接 依赖注入
 def get_db():
@@ -22,3 +23,5 @@ def get_db():
         yield db
     finally:
         db.close()
+def get_redis():
+    return redis_client

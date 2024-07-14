@@ -36,7 +36,7 @@ class Settings(BaseSettings):
     POSTGRES_URL: str = f"postgresql://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{POSTGRES_HOST}:{POSTGRES_PORT}/{POSTGRES_DB}"
     # mysql settings
 
-    MYSQL_HOST: str = "localhost"
+    MYSQL_HOST: str = "127.0.0.1"
     MYSQL_PORT: int = 3306
     MYSQL_USER: str = "root"
     MYSQL_PASSWORD: str = "123456"
@@ -45,7 +45,8 @@ class Settings(BaseSettings):
     # redis settings
     REDIS_HOST: str = "localhost"
     REDIS_PORT: int = 6379
-    REDIS_URL: str = f"redis://{REDIS_HOST}:{REDIS_PORT}"
+    REDIS_DB: int = 0
+    REDIS_URL: str = f"redis://{REDIS_HOST}:{REDIS_PORT}/{REDIS_DB}"
     # mongodb settings
     MONGO_HOST: str = "localhost"
     MONGO_PORT: int = 27017

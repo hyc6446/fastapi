@@ -1,7 +1,7 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="meNFT" type="Python.FastAPI">
     <option name="additionalOptions" value="--port 9500 --reload" />
-    <option name="file" value="F:\Python\FastAPI\meNFT\app\main.py" />
+    <option name="file" value="D:\Python\fastapi\meNFT\app\main.py" />
     <module name="meNFT" />
     <option name="ENV_FILES" value="" />
     <option name="INTERPRETER_OPTIONS" value="" />

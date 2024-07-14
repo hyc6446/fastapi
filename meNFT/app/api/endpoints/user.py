@@ -11,8 +11,7 @@ from fastapi import APIRouter, Depends, HTTPException,status
 from sqlalchemy.orm import Session
 from app.db.repositories import user_repository
 from app.schemas.user import UserCreate, UpdateUser, User
-from app.schemas.common import Response
-from app.db.database import get_db
+from app.db.database import get_db, get_redis
 from app.services.user_service import UserService
 from typing import Annotated, List
 
@@ -38,11 +37,13 @@ async def get_user(user_id: int, db: Session = Depends(get_db)):
 
 
 @router.post("/", response_model=User)
-async def create_user(user: UserCreate, db: Session = Depends(get_db)):
+async def create_user(user: UserCreate, db: Session = Depends(get_db), redis_client=Depends(get_redis)):
     """
     Create a new user.
     """
-    return user_repository.create_user(db, user)
+    result = user_repository.create_user(db, user)
+    redis_client.set(str(result.id), "active")
+    return result
 
 
 @router.get("/{user_id}/status", response_model=str)
